@@ -79,7 +79,7 @@ function parseWeatherData(weatherData) {
     page1.setSunrise(sunrise.getHours() + ":" + addZero(sunrise.getMinutes()), "Sunrise")
     page1.setSunset(sunset.getHours() + ":" + addZero(sunset.getMinutes()), "Sunrise")
 
-    console.log(new Date(sunset))
+    console.log(new Date(weatherData.dt * 1000))
 }
 
 

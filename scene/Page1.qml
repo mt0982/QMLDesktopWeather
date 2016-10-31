@@ -112,7 +112,7 @@ Item {
 
     /* Weather Information */
     GridView {
-        //spacing: 5
+        id: gridView
         anchors.left: bg.right
         anchors.leftMargin: 18
         anchors.right: parent.right
@@ -121,9 +121,10 @@ Item {
         anchors.topMargin: 5
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
-        cellHeight: 132
-        cellWidth: 132
+        cellHeight: 135
+        cellWidth: 135
         clip: true
+        visible: false
 
         model: ListModel {
             id: listModel
@@ -140,6 +141,8 @@ Item {
                 text: desc
                 font.pointSize: 18
                 font.family: "AvantGarde LT ExtraLight"
+                anchors.left: parent.left
+                anchors.leftMargin: 5
             }
 
             Text {
@@ -148,9 +151,18 @@ Item {
                 font.pointSize: 16
                 font.family: "AvantGarde LT ExtraLight"
                 anchors.top: textDesc.bottom
-                anchors.bottomMargin: 5
+                anchors.left: parent.left
+                anchors.leftMargin: 5
             }
         }
+    }
+
+    DropShadow{
+        anchors.fill: gridView
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: gridView
     }
 }
 
