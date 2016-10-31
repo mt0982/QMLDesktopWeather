@@ -1,8 +1,11 @@
 
 var city;
 
-function setCityName(name) {
-    city = name;
+function setCityName(name) { city = name; }
+
+function addZero(i) {
+    if (i < 10) i = "0" + i;
+    return i;
 }
 
 function parseJSON() {
@@ -26,6 +29,8 @@ function parseJSON() {
 
 function parseWeatherData(weatherData) {
 
+    page1.clearList();
+
     var temp = weatherData.main.temp - 273.15;
     var temp_min = weatherData.main.temp_min - 272.15;
     var temp_max = weatherData.main.temp_max - 272.15;
@@ -39,6 +44,11 @@ function parseWeatherData(weatherData) {
     var country = weatherData.sys.country;
     var description = weatherData.weather[0].description;
     var weathericon = weatherData.weather[0].icon;
+    var sunrise = new Date(weatherData.sys.sunrise * 1000);
+    var sunset = new Date(weatherData.sys.sunset * 1000);
+    var sea_level = weatherData.main.sea_level;
+    var grd_level = weatherData.main.grnd_level;
+    var wind_deg = weatherData.wind.deg;
 
     console.log("Country: " + country + "\n" +
                 "Temp: " + temp.toPrecision(4) + "\n" +
@@ -62,7 +72,14 @@ function parseWeatherData(weatherData) {
     //page1.cityLongitude = longitude;
     page1.setWind(wind_speed, "Wind")
     page1.setPressure(pressure, "Pressure")
+    page1.setSeaLevel(sea_level, "Pr. (Sea)")
+    page1.setGndLevel(grd_level, "Pr. (Gnd)")
+    page1.setwindDeg(wind_deg, "Wind Dir.")
     //page1.weathericon = "http://openweathermap.org/img/w/" + weathericon + ".png"
+    page1.setSunrise(sunrise.getHours() + ":" + addZero(sunrise.getMinutes()), "Sunrise")
+    page1.setSunset(sunset.getHours() + ":" + addZero(sunset.getMinutes()), "Sunrise")
+
+    console.log(new Date(sunset))
 }
 
 

@@ -11,12 +11,18 @@ Item {
     property real cityTemperature: -99
     //property real weathericon: "http://openweathermap.org/img/w/" + weathericon + ".png"
 
-    function setTemperature(temp, desc) { listModel.append({"value":temp + "°", "desc":desc}) }
+    function clearList() { listModel.clear() }
+    function setTemperature(temp, desc) { listModel.append({"value":temp + "°C", "desc":desc}) }
     function setHumidity(humidity, desc) { listModel.append({"value":humidity + "%", "desc":desc}) }
     function setCloudiness(cloud, desc) { listModel.append({"value":cloud + "%", "desc":desc}) }
     //function setLatLot(lat, lot, desc) { listModel.append({"value":temp, "desc":desc}) }
     function setWind(wind, desc) { listModel.append({"value":wind + "KM/H", "desc":desc}) }
     function setPressure(pressure, desc) { listModel.append({"value":pressure + "HPA", "desc":desc}) }
+    function setSeaLevel(level, desc) { listModel.append({"value":level + "HPA", "desc":desc}) }
+    function setGndLevel(level, desc) { listModel.append({"value":level + "HPA", "desc":desc}) }
+    function setwindDeg(deg, desc) { listModel.append({"value":deg + "°", "desc":desc}) }
+    function setSunrise(time, desc) { listModel.append({"value":time, "desc":desc}) }
+    function setSunset(time, desc) { listModel.append({"value":time, "desc":desc}) }
 
     /* Content */
     Rectangle {
@@ -121,11 +127,6 @@ Item {
 
         model: ListModel {
             id: listModel
-//            ListElement { value: ccc(); desc: "Feels like" }
-//            ListElement { value: cityWindSpeed + " KM/H"; desc: "Wind" }
-//            ListElement { value: "---"; desc: "Visiblity" }
-//            ListElement { value: cityHumidity + "%"; desc: "Humidity" }
-//            ListElement { value: cityPressure + " HPA"; desc: "Pressure" }
         }
 
         delegate: Rectangle {
@@ -144,7 +145,7 @@ Item {
             Text {
                 color: "#ffffff"
                 text: value
-                font.pointSize: 18
+                font.pointSize: 16
                 font.family: "AvantGarde LT ExtraLight"
                 anchors.top: textDesc.bottom
                 anchors.bottomMargin: 5
