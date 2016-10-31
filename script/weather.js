@@ -54,12 +54,26 @@ function parseWeatherData(weatherData) {
     /* Set Output Data */
     page1.cityName = city;
     page1.countryName = country;
-    page1.cityTemperature = temp.toFixed(2)
-//    page1.cityHumidity = humidity;
-//    page1.cityCloudiness = clouds;
-//    page1.cityLatitude = latitude;
-//    page1.cityLongitude = longitude;
-//    page1.cityWindSpeed = wind_speed;
-//    page1.cityPressure = pressure;
-//    page1.weathericon = "http://openweathermap.org/img/w/" + weathericon + ".png"
+    page1.cityTemperature = temp.toFixed(2);
+    page1.setTemperature(temp.toFixed(2), "Feels Like")
+    page1.setHumidity(humidity, "Humidity")
+    page1.setCloudiness(clouds, "Clouds")
+    //page1.cityLatitude = latitude;
+    //page1.cityLongitude = longitude;
+    page1.setWind(wind_speed, "Wind")
+    page1.setPressure(pressure, "Pressure")
+    //page1.weathericon = "http://openweathermap.org/img/w/" + weathericon + ".png"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

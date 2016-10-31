@@ -9,6 +9,14 @@ Item {
     property string cityName: "-------"
     property string countryName: "-------"
     property real cityTemperature: -99
+    //property real weathericon: "http://openweathermap.org/img/w/" + weathericon + ".png"
+
+    function setTemperature(temp, desc) { listModel.append({"value":temp + "°", "desc":desc}) }
+    function setHumidity(humidity, desc) { listModel.append({"value":humidity + "%", "desc":desc}) }
+    function setCloudiness(cloud, desc) { listModel.append({"value":cloud + "%", "desc":desc}) }
+    //function setLatLot(lat, lot, desc) { listModel.append({"value":temp, "desc":desc}) }
+    function setWind(wind, desc) { listModel.append({"value":wind + "KM/H", "desc":desc}) }
+    function setPressure(pressure, desc) { listModel.append({"value":pressure + "HPA", "desc":desc}) }
 
     /* Content */
     Rectangle {
@@ -100,7 +108,7 @@ Item {
     GridView {
         //spacing: 5
         anchors.left: bg.right
-        anchors.leftMargin: 5
+        anchors.leftMargin: 18
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.top: list.bottom
@@ -111,43 +119,37 @@ Item {
         cellWidth: 132
         clip: true
 
-        model:  ListModel {
-            ListElement { clr: "red" }
-            ListElement { clr: "green" }
-            ListElement { clr: "orange" }
-            ListElement { clr: "gray" }
-            ListElement { clr: "steel blue" }
+        model: ListModel {
+            id: listModel
+//            ListElement { value: ccc(); desc: "Feels like" }
+//            ListElement { value: cityWindSpeed + " KM/H"; desc: "Wind" }
+//            ListElement { value: "---"; desc: "Visiblity" }
+//            ListElement { value: cityHumidity + "%"; desc: "Humidity" }
+//            ListElement { value: cityPressure + " HPA"; desc: "Pressure" }
         }
 
         delegate: Rectangle {
             width: 128
             height: 128
-            color: clr
+            color: "#1a1d21"
+
+            Text {
+                id: textDesc
+                color: "#ffffff"
+                text: desc
+                font.pointSize: 18
+                font.family: "AvantGarde LT ExtraLight"
+            }
+
+            Text {
+                color: "#ffffff"
+                text: value
+                font.pointSize: 18
+                font.family: "AvantGarde LT ExtraLight"
+                anchors.top: textDesc.bottom
+                anchors.bottomMargin: 5
+            }
         }
-
-//        Rectangle {
-//            color: "#302a33"
-//            width: 128
-//            height: 128
-
-//            Text {
-//                color: "#ffffff"
-//                text: "24°"
-//                font.pointSize: 36
-//                font.family: "AvantGarde LT ExtraLight"
-//            }
-
-//            Text {
-//                color: "#ffffff"
-//                text: "Feels like"
-//                font.pointSize: 18
-//                font.family: "AvantGarde LT ExtraLight"
-//                anchors.bottom: parent.bottom
-//                anchors.bottomMargin: 5
-//            }
-//        }
-
-
     }
 }
 
