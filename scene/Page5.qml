@@ -19,7 +19,7 @@ Item {
             interactive: true
             width: parent.width
             height: parent.height
-            contentWidth: parent.width * 2.0
+            contentWidth: parent.width * 1.5
             contentHeight: parent.height
             boundsBehavior: Flickable.StopAtBounds
             clip: true

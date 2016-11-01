@@ -49,7 +49,7 @@ Item {
                 onClicked: {
                     Weather.setCityName(searchField.text)
                     Weather.parseJSON()
-                    Weather.parseJSON5Days()()
+                    Weather.parseJSON5Days()
                     popup.close()
                 }
             }
