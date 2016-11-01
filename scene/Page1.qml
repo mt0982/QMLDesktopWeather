@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
+import "../script/weather.js" as Weather
 
 Item {
 
@@ -9,7 +10,8 @@ Item {
     property string cityName: "-------"
     property string countryName: "-------"
     property real cityTemperature: -99
-    //property real weathericon: "http://openweathermap.org/img/w/" + weathericon + ".png"
+    property string cityDescription: "-------"
+    property url cityWeatherIcon: " "
 
     function clearList() { listModel.clear() }
     function setTemperature(temp, desc) { listModel.append({"value":temp + "°C", "desc":desc}) }
@@ -24,6 +26,30 @@ Item {
     function setSunrise(time, desc) { listModel.append({"value":time, "desc":desc}) }
     function setSunset(time, desc) { listModel.append({"value":time, "desc":desc}) }
 
+    /* Search Field */
+    Popup {
+        id: popup
+        transformOrigin: Popup.Center
+        width: 250
+        height: 150
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+        ColumnLayout {
+            TextField { id: searchField; placeholderText: qsTr("City name") }
+            Button {
+                implicitWidth: parent.width;
+                text: qsTr("Find")
+                onClicked: {
+                    Weather.setCityName(searchField.text)
+                    Weather.parseJSON()
+                    popup.close()
+                }
+            }
+        }
+    }
+
     /* Content */
     Rectangle {
         anchors.fill: parent
@@ -32,7 +58,6 @@ Item {
 
     /* Background */
     Image {
-        x: 0; y: 0
         id: bg
         source: "qrc:/image/night.jpg"
         width: 200 //parent.width * 0.3
@@ -40,6 +65,28 @@ Item {
         fillMode: Image.PreserveAspectCrop
         visible: false
 
+        /* Logo */
+        Image {
+            id: weatherLogo
+            source: cityWeatherIcon
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            visible: false
+        }
+
+        DropShadow {
+            anchors.fill: weatherLogo
+            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: weatherLogo
+        }
+
+        /* Title */
         Text {
             id: textCityName
             text: cityName + ", " + countryName
@@ -53,6 +100,7 @@ Item {
         }
 
         Text {
+            id: textCityTemperature
             text: cityTemperature + "°"
             anchors.left: parent.left
             anchors.leftMargin: 10
@@ -61,6 +109,17 @@ Item {
             font.family: "AvantGarde LT ExtraLight"
             font.pointSize: 24
             color: "#ffffff"
+        }
+
+        Text {
+            text: cityDescription
+            anchors.left: weatherLogo.right
+            anchors.leftMargin: 10
+            anchors.verticalCenter: weatherLogo.verticalCenter
+            font.family: "AvantGarde LT ExtraLight"
+            font.pointSize: 12
+            color: "#ffffff"
+            font.capitalization: Font.Capitalize
         }
     }
 
@@ -124,7 +183,6 @@ Item {
         cellHeight: 135
         cellWidth: 135
         clip: true
-        visible: false
 
         model: ListModel {
             id: listModel
@@ -133,7 +191,7 @@ Item {
         delegate: Rectangle {
             width: 128
             height: 128
-            color: "#1a1d21"
+            color: Qt.rgba(Math.random() * 0.7, Math.random() * 0.7, Math.random() * 0.7, 1.0)//"#1a1d21"
 
             Text {
                 id: textDesc
@@ -151,6 +209,7 @@ Item {
                 font.pointSize: 16
                 font.family: "AvantGarde LT ExtraLight"
                 anchors.top: textDesc.bottom
+                anchors.bottomMargin: 5
                 anchors.left: parent.left
                 anchors.leftMargin: 5
             }
@@ -163,6 +222,27 @@ Item {
         samples: 17
         color: "#80000000"
         source: gridView
+    }
+
+    /* Search */
+    ToolButton {
+        width: 40
+        height: 40
+        anchors.right: bg.right
+        anchors.rightMargin: 5
+        y: 8
+        z: 2
+
+        onClicked: {
+            popup.x = (parent.width - popup.width) / 2
+            popup.y = (parent.height - popup.height) / 2
+            popup.open()
+        }
+
+        Image {
+            source: "qrc:/image/search.png"
+            anchors.fill: parent
+        }
     }
 }
 

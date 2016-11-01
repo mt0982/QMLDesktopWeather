@@ -4,5 +4,6 @@
         <file>scene/Page1.qml</file>
         <file>image/night.jpg</file>
         <file>script/weather.js</file>
+        <file>image/search.png</file>
     </qresource>
 </RCC>

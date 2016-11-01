@@ -65,6 +65,7 @@ function parseWeatherData(weatherData) {
     page1.cityName = city;
     page1.countryName = country;
     page1.cityTemperature = temp.toFixed(2);
+    page1.cityDescription = description
     page1.setTemperature(temp.toFixed(2), "Feels Like")
     page1.setHumidity(humidity, "Humidity")
     page1.setCloudiness(clouds, "Clouds")
@@ -75,7 +76,7 @@ function parseWeatherData(weatherData) {
     page1.setSeaLevel(sea_level, "Pr. (Sea)")
     page1.setGndLevel(grd_level, "Pr. (Gnd)")
     page1.setwindDeg(wind_deg, "Wind Dir.")
-    //page1.weathericon = "http://openweathermap.org/img/w/" + weathericon + ".png"
+    page1.cityWeatherIcon = "http://openweathermap.org/img/w/" + weathericon + ".png"
     page1.setSunrise(sunrise.getHours() + ":" + addZero(sunrise.getMinutes()), "Sunrise")
     page1.setSunset(sunset.getHours() + ":" + addZero(sunset.getMinutes()), "Sunrise")
 
@@ -83,7 +84,63 @@ function parseWeatherData(weatherData) {
 }
 
 
+//function parseWeatherDataForecast(weatherData) {
 
+//    /* Clear Container */
+//    temperaturePage.clear();
+//    cloudsPage.clear();
+//    pressurePage.clear()
+//    windPage.clear()
+
+//    /* Set City And Country Name */
+//    temperaturePage.cityName = city;
+//    cloudsPage.cityName = city;
+//    pressurePage.cityName = city;
+//    windPage.cityName = city;
+//    temperaturePage.countryName = weatherData.city.country;
+//    cloudsPage.countryName = weatherData.city.country;
+//    pressurePage.countryName = weatherData.city.country;
+//    windPage.countryName = weatherData.city.country;
+
+//    /* Properties */
+//    var mintemp = 99;
+//    var maxtemp = -99;
+//    var maxDate = new Date();
+//    var pressureMin = 5000;
+//    var pressureMax = -5000;
+//    var windMin = 5000;
+//    var windMax = -5000;
+
+//    for(var i = 0; i < weatherData.cnt; i++) {
+//        var temperature = (weatherData.list[i].main.temp - 273.15).toFixed(2);
+//        var pressure = (weatherData.list[i].main.pressure).toFixed(2);
+//        var clouds = weatherData.list[i].clouds.all;
+//        var wind = weatherData.list[i].wind.speed;
+//        var date = new Date(weatherData.list[i].dt_txt);
+
+//        temperaturePage.append(date.getTime(), temperature);
+//        pressurePage.append(date.getTime(), pressure);
+//        cloudsPage.append(date.getTime(), clouds);
+//        windPage.append(date.getTime(), wind);
+
+//        mintemp = Math.min(mintemp, temperature);
+//        maxtemp = Math.max(maxtemp, temperature);
+//        pressureMin = Math.min(pressureMin, pressure);
+//        pressureMax = Math.max(pressureMax, pressure);
+//        windMin = Math.min(windMin, wind);
+//        windMax = Math.max(windMax, wind);
+//        maxDate = Math.max(maxDate, date);
+//    }
+
+//    temperaturePage.xAxisRange(new Date(), new Date(maxDate));
+//    temperaturePage.yAxisRange(mintemp - 1, maxtemp + 1);
+//    pressurePage.xAxisRange(new Date(), new Date(maxDate));
+//    pressurePage.yAxisRange(pressureMin - 10, pressureMax + 10);
+//    cloudsPage.xAxisRange(new Date(), new Date(maxDate));
+//    cloudsPage.yAxisRange(-10, 110);
+//    windPage.xAxisRange(new Date(), new Date(maxDate));
+//    windPage.yAxisRange(windMin - 1, windMax + 1);
+//}
 
 
 
