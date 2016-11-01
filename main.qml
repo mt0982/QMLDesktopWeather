@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import "scene" as Scene
 import "script/weather.js" as Weather
@@ -23,15 +24,32 @@ ApplicationWindow {
         //Weather.parseJSON16Days();
     }
 
-//    Scene.Page1 {
-//        id: page1
-//        anchors.fill: parent
-//    }
+    //    Scene.Page1 {
+    //        id: page1
+    //        anchors.fill: parent
+    //    }
 
-    Scene.Page2 {
-        id: page2
-        anchors.fill: parent
+    TabBar {
+        id: tabBar
+        width: parent.width
+        TabButton { text: qsTr("Temperature") }
+        TabButton { text: qsTr("Pressure") }
+        TabButton { text: qsTr("Clouds") }
+        TabButton { text: qsTr("Winds") }
     }
+
+    StackLayout {
+        width: parent.width
+        anchors.top: tabBar.bottom
+        anchors.bottom: parent.bottom
+        currentIndex: tabBar.currentIndex
+
+        Scene.Page2 { id: page2 }
+        Scene.Page2 { id: page3 }
+        Scene.Page2 { id: page4 }
+        Scene.Page2 { id: page5 }
+    }
+
 }
 
 

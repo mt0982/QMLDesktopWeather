@@ -166,10 +166,10 @@ function parseJSON5Days() {
 function parseWeatherData5Days(weatherData) {
 
     /* Clear Container */
-//    temperaturePage.clear();
-//    cloudsPage.clear();
-//    pressurePage.clear()
-//    windPage.clear()
+    page2.clear();
+    page3.clear();
+    page4.clear()
+    page5.clear()
 
     /* Set City And Country Name */
 //    temperaturePage.cityName = city;
@@ -197,14 +197,10 @@ function parseWeatherData5Days(weatherData) {
         var wind = weatherData.list[i].wind.speed;
         var date = new Date(weatherData.list[i].dt_txt);
 
-//        console.log(i + ": " +temperature + "(" + date + ")")
-
         page2.append(date.getTime(), temperature);
-
-//        temperaturePage.append(date.getTime(), temperature);
-//        pressurePage.append(date.getTime(), pressure);
-//        cloudsPage.append(date.getTime(), clouds);
-//        windPage.append(date.getTime(), wind);
+        page3.append(date.getTime(), pressure);
+        page4.append(date.getTime(), clouds);
+        page5.append(date.getTime(), wind);
 
         mintemp = Math.min(mintemp, temperature);
         maxtemp = Math.max(maxtemp, temperature);
@@ -217,12 +213,12 @@ function parseWeatherData5Days(weatherData) {
 
     page2.xAxisRange(new Date(), new Date(maxDate));
     page2.yAxisRange(mintemp - 1, maxtemp + 1);
-//    pressurePage.xAxisRange(new Date(), new Date(maxDate));
-//    pressurePage.yAxisRange(pressureMin - 10, pressureMax + 10);
-//    cloudsPage.xAxisRange(new Date(), new Date(maxDate));
-//    cloudsPage.yAxisRange(-10, 110);
-//    windPage.xAxisRange(new Date(), new Date(maxDate));
-//    windPage.yAxisRange(windMin - 1, windMax + 1);
+    page3.xAxisRange(new Date(), new Date(maxDate));
+    page3.yAxisRange(pressureMin - 10, pressureMax + 10);
+    page4.xAxisRange(new Date(), new Date(maxDate));
+    page4.yAxisRange(-10, 110);
+    page5.xAxisRange(new Date(), new Date(maxDate));
+    page5.yAxisRange(windMin - 1, windMax + 1);
 }
 
 
