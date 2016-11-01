@@ -142,34 +142,36 @@ function parseWeatherData16Days(weatherData) {
     }
 }
 
+/* 5 Days */
+function parseJSON5Days() {
+    var weatherAppKey = "f23961cb493d52dbd56fd0d656b3a396";
 
+    if (weatherAppKey != "") {
+        var xhr = new XMLHttpRequest;
+        xhr.open("GET", "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + weatherAppKey +
+                 "&cnt=16");
 
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var a = JSON.parse(xhr.responseText);
+                parseWeatherData5Days(a);
+            }
+        }
+        xhr.send();
+    } else {
+        console.log("ERROR: No App Key")
+    }
+}
 
+function parseWeatherData5Days(weatherData) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function parseWeatherDataForecast(weatherData) {
-
-//    /* Clear Container */
+    /* Clear Container */
 //    temperaturePage.clear();
 //    cloudsPage.clear();
 //    pressurePage.clear()
 //    windPage.clear()
 
-//    /* Set City And Country Name */
+    /* Set City And Country Name */
 //    temperaturePage.cityName = city;
 //    cloudsPage.cityName = city;
 //    pressurePage.cityName = city;
@@ -179,45 +181,49 @@ function parseWeatherData16Days(weatherData) {
 //    pressurePage.countryName = weatherData.city.country;
 //    windPage.countryName = weatherData.city.country;
 
-//    /* Properties */
-//    var mintemp = 99;
-//    var maxtemp = -99;
-//    var maxDate = new Date();
-//    var pressureMin = 5000;
-//    var pressureMax = -5000;
-//    var windMin = 5000;
-//    var windMax = -5000;
+    /* Properties */
+    var mintemp = 99;
+    var maxtemp = -99;
+    var maxDate = new Date();
+    var pressureMin = 5000;
+    var pressureMax = -5000;
+    var windMin = 5000;
+    var windMax = -5000;
 
-//    for(var i = 0; i < weatherData.cnt; i++) {
-//        var temperature = (weatherData.list[i].main.temp - 273.15).toFixed(2);
-//        var pressure = (weatherData.list[i].main.pressure).toFixed(2);
-//        var clouds = weatherData.list[i].clouds.all;
-//        var wind = weatherData.list[i].wind.speed;
-//        var date = new Date(weatherData.list[i].dt_txt);
+    for(var i = 0; i < weatherData.cnt; i++) {
+        var temperature = (weatherData.list[i].main.temp - 273.15).toFixed(2);
+        var pressure = (weatherData.list[i].main.pressure).toFixed(2);
+        var clouds = weatherData.list[i].clouds.all;
+        var wind = weatherData.list[i].wind.speed;
+        var date = new Date(weatherData.list[i].dt_txt);
+
+//        console.log(i + ": " +temperature + "(" + date + ")")
+
+        page2.append(date.getTime(), temperature);
 
 //        temperaturePage.append(date.getTime(), temperature);
 //        pressurePage.append(date.getTime(), pressure);
 //        cloudsPage.append(date.getTime(), clouds);
 //        windPage.append(date.getTime(), wind);
 
-//        mintemp = Math.min(mintemp, temperature);
-//        maxtemp = Math.max(maxtemp, temperature);
-//        pressureMin = Math.min(pressureMin, pressure);
-//        pressureMax = Math.max(pressureMax, pressure);
-//        windMin = Math.min(windMin, wind);
-//        windMax = Math.max(windMax, wind);
-//        maxDate = Math.max(maxDate, date);
-//    }
+        mintemp = Math.min(mintemp, temperature);
+        maxtemp = Math.max(maxtemp, temperature);
+        pressureMin = Math.min(pressureMin, pressure);
+        pressureMax = Math.max(pressureMax, pressure);
+        windMin = Math.min(windMin, wind);
+        windMax = Math.max(windMax, wind);
+        maxDate = Math.max(maxDate, date);
+    }
 
-//    temperaturePage.xAxisRange(new Date(), new Date(maxDate));
-//    temperaturePage.yAxisRange(mintemp - 1, maxtemp + 1);
+    page2.xAxisRange(new Date(), new Date(maxDate));
+    page2.yAxisRange(mintemp - 1, maxtemp + 1);
 //    pressurePage.xAxisRange(new Date(), new Date(maxDate));
 //    pressurePage.yAxisRange(pressureMin - 10, pressureMax + 10);
 //    cloudsPage.xAxisRange(new Date(), new Date(maxDate));
 //    cloudsPage.yAxisRange(-10, 110);
 //    windPage.xAxisRange(new Date(), new Date(maxDate));
 //    windPage.yAxisRange(windMin - 1, windMax + 1);
-//}
+}
 
 
 
