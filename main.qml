@@ -42,27 +42,43 @@ ApplicationWindow {
                   spacing: 0
                   anchors.top: customHeader.bottom
 
-                  TabButton { id: tb1; text: qsTr("Temperature"); height: parent.height
+                  TabButton { id: tb1; text: qsTr("TEMPERATURE"); height: parent.height
                       background: Rectangle { anchors.fill: parent; color: "#1a1d21"
                           Rectangle { width: tb1.width; height: tb1.checked ? 3: 0; color: "#e33630"; y: tb1.height - 3 }
                       }
+                      contentItem: Text { text: parent.text; font.pointSize: 10.5; font.family: "Roboto";
+                          font.weight: Font.Medium; color: parent.checked ? "#e33630" : "white"
+                          horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                      }
                   }
 
-                  TabButton { id: tb2; text: qsTr("Pressure"); height: parent.height
+                  TabButton { id: tb2; text: qsTr("PRESSURE"); height: parent.height
                       background: Rectangle { anchors.fill: parent; color: "#1a1d21"
                           Rectangle { width: tb1.width; height: tb2.checked ? 3: 0; color: "#e33630"; y: tb2.height - 3 }
                       }
-                  }
-
-                  TabButton { id: tb3; text: qsTr("Clouds"); height: parent.height
-                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
-                          Rectangle { width: tb3.width; height: tb3.checked ? 3: 0; color: "#e33630"; y: tb3.height - 3 }
+                      contentItem: Text { text: parent.text; font.pointSize: 10.5; font.family: "Roboto";
+                          font.weight: Font.Medium; color: parent.checked ? "#e33630" : "white"
+                          horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
                       }
                   }
 
-                  TabButton { id: tb4; text: qsTr("Winds"); height: parent.height
+                  TabButton { id: tb3; text: qsTr("CLOUDS"); height: parent.height
+                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
+                          Rectangle { width: tb3.width; height: tb3.checked ? 3: 0; color: "#e33630"; y: tb3.height - 3 }
+                      }
+                      contentItem: Text { text: parent.text; font.pointSize: 10.5; font.family: "Roboto";
+                          font.weight: Font.Medium; color: parent.checked ? "#e33630" : "white"
+                          horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                      }
+                  }
+
+                  TabButton { id: tb4; text: qsTr("WINDS"); height: parent.height
                       background: Rectangle { anchors.fill: parent; color: "#1a1d21"
                           Rectangle { width: tb4.width; height: tb4.checked ? 3: 0; color: "#e33630"; y: tb4.height - 3 }
+                      }
+                      contentItem: Text { text: parent.text; font.pointSize: 10.5; font.family: "Roboto";
+                          font.weight: Font.Medium; color: parent.checked ? "#e33630" : "white"
+                          horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
                       }
                   }
               }
