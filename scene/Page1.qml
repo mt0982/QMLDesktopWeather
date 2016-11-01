@@ -13,7 +13,7 @@ Item {
     property string cityDescription: "-------"
     property url cityWeatherIcon: " "
     property string weatherUpdateTime: " "
-    property int dayIndex: 0
+    property string dayDate: " "
 
     /* Functions */
     function clearDayList() { listDay.clear() }
@@ -29,7 +29,7 @@ Item {
     function setwindDeg(deg, desc) { listModel.append({"value":deg + "°", "desc":desc}) }
     function setSunrise(time, desc) { listModel.append({"value":time, "desc":desc}) }
     function setSunset(time, desc) { listModel.append({"value":time, "desc":desc}) }
-    function addDay(day) { listDay.append({"txt":day, "idx": dayIndex++});}
+    function addDay(day) { listDay.append({"txt":day }) }
 
     /* Search Field */
     Popup {
@@ -156,17 +156,18 @@ Item {
             id: textDelegate
             width: 64
             height: 64
-            text: txt + "<font size='0'" + idx + "</font>"
+            text: txt
             font.family: "BahamasLight"
             font.pointSize: 14
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             color: "white"
+
             MouseArea {
                 anchors.fill: parent;
                 onClicked:{
-                    clearList()
-                    dayIndex = idx //console.log(idx)
+                    dayDate = txt
+                    Weather.setCityName(cityName)
                     Weather.parseJSON16Days();
                 }
             }

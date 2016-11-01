@@ -108,19 +108,37 @@ function parseWeatherData16Days(weatherData) {
 
     /* Clear Data */
     page1.clearDayList()
-
-    /* Parameters */
-    var idx = page1.dayIndex;
-    var temp_max = weatherData.list[idx].temp.max - 273.15;
-    console.log(idx)
-
-    /* Reset Index */
-    page1.dayIndex = 0
+    page1.clearList()
 
     /* Push To ListView */
     for(var i = 0; i < weatherData.cnt; i++) {
         var dt = new Date(weatherData.list[i].dt * 1000);
-        page1.addDay((dt.getUTCMonth() + 1) + "." + addZero(dt.getDate()))
+        var mmdd = (dt.getUTCMonth() + 1) + "." + addZero(dt.getDate())
+        var temp_max = weatherData.list[i].temp.max - 273.15
+        var temp_min = weatherData.list[i].temp.min - 273.15
+        var temp_eve = weatherData.list[i].temp.eve - 273.15
+        var temp_night = weatherData.list[i].temp.night - 273.15
+        var temp_morn = weatherData.list[i].temp.morn - 273.15
+        var temp_day = weatherData.list[i].temp.day - 273.15
+        var pressure = weatherData.list[i].pressure
+        var humidity = weatherData.list[i].humidity
+        var wind_speed = weatherData.list[i].speed
+        var wind_deg = weatherData.list[i].deg
+        var clouds = weatherData.list[i].clouds
+
+
+        if(mmdd == page1.dayDate) {
+            page1.setTemperature(temp_max.toFixed(2), "Temp Max")
+            page1.setTemperature(temp_min.toFixed(2), "Temp Min")
+            page1.setCloudiness(clouds, "Clouds")
+            page1.setPressure(pressure, "Pressure")
+            page1.setHumidity(humidity, "Humidity")
+            page1.setWind(wind_speed, "Wind")
+            page1.setwindDeg(wind_deg, "Wind Deg.")
+        }
+
+        /* Push To ListView */
+        page1.addDay(mmdd)
     }
 }
 
