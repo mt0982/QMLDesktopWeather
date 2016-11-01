@@ -12,6 +12,7 @@ Item {
     property real cityTemperature: -99
     property string cityDescription: "-------"
     property url cityWeatherIcon: " "
+    property string weatherUpdateTime: " "
 
     function clearList() { listModel.clear() }
     function setTemperature(temp, desc) { listModel.append({"value":temp + "°C", "desc":desc}) }
@@ -59,7 +60,7 @@ Item {
     /* Background */
     Image {
         id: bg
-        source: "qrc:/image/night.jpg"
+        source: "https://s-media-cache-ak0.pinimg.com/originals/a4/0e/a8/a40ea8733910d1e6ff39355712a1ed94.jpg"
         width: 200 //parent.width * 0.3
         height: parent.height
         fillMode: Image.PreserveAspectCrop
@@ -243,6 +244,17 @@ Item {
             source: "qrc:/image/search.png"
             anchors.fill: parent
         }
+    }
+
+    /* Update Time */
+    Text {
+        anchors.right: parent.right
+        anchors.rightMargin: 15
+        y: parent.height - 25
+        text: " Update time: " + weatherUpdateTime
+        font.family: "AvantGarde LT ExtraLight"
+        font.pointSize: 12
+        color: "#ffffff"
     }
 }
 
