@@ -14,6 +14,7 @@ Item {
     property url cityWeatherIcon: " "
     property string weatherUpdateTime: " "
 
+    function clearDayList() { listDay.clear() }
     function clearList() { listModel.clear() }
     function setTemperature(temp, desc) { listModel.append({"value":temp + "°C", "desc":desc}) }
     function setHumidity(humidity, desc) { listModel.append({"value":humidity + "%", "desc":desc}) }
@@ -26,6 +27,7 @@ Item {
     function setwindDeg(deg, desc) { listModel.append({"value":deg + "°", "desc":desc}) }
     function setSunrise(time, desc) { listModel.append({"value":time, "desc":desc}) }
     function setSunset(time, desc) { listModel.append({"value":time, "desc":desc}) }
+    function addDay(day) { listDay.append({"txt":day}) }
 
     /* Search Field */
     Popup {
@@ -146,16 +148,7 @@ Item {
         clip: true
         spacing: 5
 
-        model: ListModel {
-            ListElement { txt: "10.31" }
-            ListElement { txt: "11.01" }
-            ListElement { txt: "11.02" }
-            ListElement { txt: "11.03" }
-            ListElement { txt: "11.04" }
-            ListElement { txt: "11.05" }
-            ListElement { txt: "11.06" }
-            ListElement { txt: "11.07" }
-        }
+        model: ListModel { id: listDay }
 
         delegate: Text {
             id: textDelegate

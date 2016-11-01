@@ -19,6 +19,7 @@ ApplicationWindow {
     Component.onCompleted: {
         Weather.setCityName("Lublin")
         Weather.parseJSON()
+        Weather.parseJSON16Days();
     }
 
     Scene.Page1 {

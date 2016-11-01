@@ -50,16 +50,16 @@ function parseWeatherData(weatherData) {
     var grd_level = weatherData.main.grnd_level;
     var wind_deg = weatherData.wind.deg;
 
-    console.log("Country: " + country + "\n" +
-                "Temp: " + temp.toPrecision(4) + "\n" +
-                "Wind: " + wind_speed + "m/s\n" +
-                "Wind: " + wind_direction + "deg\n" +
-                "Cloudiness: " + clouds + "%\n" +
-                "Pressure: " + pressure + "Hpa\n" +
-                "Humidity: " + humidity + "%\n" +
-                "Longitude: " + longitude + "\n" +
-                "Latitude: " + latitude + "\n" +
-                "Description: " + description + "\n")
+//    console.log("Country: " + country + "\n" +
+//                "Temp: " + temp.toPrecision(4) + "\n" +
+//                "Wind: " + wind_speed + "m/s\n" +
+//                "Wind: " + wind_direction + "deg\n" +
+//                "Cloudiness: " + clouds + "%\n" +
+//                "Pressure: " + pressure + "Hpa\n" +
+//                "Humidity: " + humidity + "%\n" +
+//                "Longitude: " + longitude + "\n" +
+//                "Latitude: " + latitude + "\n" +
+//                "Description: " + description + "\n")
 
     /* Set Output Data */
     page1.cityName = city;
@@ -81,6 +81,56 @@ function parseWeatherData(weatherData) {
     page1.setSunset(sunset.getHours() + ":" + addZero(sunset.getMinutes()), "Sunrise")
     page1.weatherUpdateTime = new Date(weatherData.dt * 1000);
 }
+
+function parseJSON16Days() {
+    var weatherAppKey = "f23961cb493d52dbd56fd0d656b3a396";
+
+    if (weatherAppKey != "") {
+        var xhr = new XMLHttpRequest;
+        xhr.open("GET", "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&appid=" + weatherAppKey +
+                 "&cnt=16");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var a = JSON.parse(xhr.responseText);
+                parseWeatherData16Days(a);
+            }
+        }
+        xhr.send();
+    } else {
+        console.log("ERROR: No App Key")
+    }
+}
+
+function parseWeatherData16Days(weatherData) {
+
+    page1.clearDayList()
+
+    for(var i = 0; i < weatherData.cnt; i++) {
+        var temp_max = (weatherData.list[i].temp.max - 273.15).toFixed(2);
+        var dt = new Date(weatherData.list[i].dt * 1000);
+        console.log((dt.getUTCMonth() + 1) + "." + dt.getDate())
+        page1.addDay((dt.getUTCMonth() + 1) + "." + addZero(dt.getDate()))
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //function parseWeatherDataForecast(weatherData) {
