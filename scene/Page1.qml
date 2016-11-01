@@ -41,11 +41,18 @@ Item {
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
+        background: Rectangle {
+            anchors.fill: parent
+            color: "#e6e6e6"
+            border.color: "black"
+        }
+
         ColumnLayout {
             TextField { id: searchField; placeholderText: qsTr("City name") }
             Button {
                 implicitWidth: parent.width;
                 text: qsTr("Find")
+
                 onClicked: {
                     Weather.setCityName(searchField.text)
                     Weather.parseJSON()

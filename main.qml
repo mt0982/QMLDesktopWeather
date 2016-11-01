@@ -36,34 +36,35 @@ ApplicationWindow {
 
           Item {
 
-              /* Header Page 2 */
-              Rectangle {
-                  id: customHeader
-                  width: parent.width
-                  height: tabBar.height
-                  color: "#1a1d21"
-
-                  Text {
-                      color: "#ffffff"
-                      text: "STATISTICS"
-                      font.pointSize: 10.5
-                      font.family: "Roboto"
-                      font.weight: Font.Medium
-                      anchors.centerIn: parent
-                  }
-              }
-
               TabBar {
                   id: tabBar
                   width: parent.width
+                  spacing: 0
                   anchors.top: customHeader.bottom
-                  TabButton { id: a;text: qsTr("Temperature") }
-                  TabButton { text: qsTr("Pressure") }
-                  TabButton { text: qsTr("Clouds") }
-                  TabButton { text: qsTr("Winds") }
-                  Material.accent: "#e33630"
-                  Material.background: "#1a1d21"
-                  Material.foreground: "white"
+
+                  TabButton { id: tb1; text: qsTr("Temperature"); height: parent.height
+                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
+                          Rectangle { width: tb1.width; height: tb1.checked ? 3: 0; color: "#e33630"; y: tb1.height - 3 }
+                      }
+                  }
+
+                  TabButton { id: tb2; text: qsTr("Pressure"); height: parent.height
+                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
+                          Rectangle { width: tb1.width; height: tb2.checked ? 3: 0; color: "#e33630"; y: tb2.height - 3 }
+                      }
+                  }
+
+                  TabButton { id: tb3; text: qsTr("Clouds"); height: parent.height
+                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
+                          Rectangle { width: tb3.width; height: tb3.checked ? 3: 0; color: "#e33630"; y: tb3.height - 3 }
+                      }
+                  }
+
+                  TabButton { id: tb4; text: qsTr("Winds"); height: parent.height
+                      background: Rectangle { anchors.fill: parent; color: "#1a1d21"
+                          Rectangle { width: tb4.width; height: tb4.checked ? 3: 0; color: "#e33630"; y: tb4.height - 3 }
+                      }
+                  }
               }
 
               StackLayout {
@@ -80,12 +81,28 @@ ApplicationWindow {
 
               DropShadow {
                   anchors.fill: tabBar
-                  horizontalOffset: 3
                   verticalOffset: 3
                   radius: 8.0
                   samples: 17
                   color: "#80000000"
                   source: tabBar
+              }
+
+              /* Header Page 2 */
+              Rectangle {
+                  id: customHeader
+                  width: parent.width
+                  height: tabBar.height
+                  color: "#1a1d21"
+
+                  Text {
+                      color: "#ffffff"
+                      text: "STATISTICS"
+                      font.pointSize: 10.5
+                      font.family: "Roboto"
+                      font.weight: Font.Medium
+                      anchors.centerIn: parent
+                  }
               }
           }
       }
