@@ -192,12 +192,16 @@ function parseWeatherData5Days(weatherData) {
 
     for(var i = 0; i < weatherData.cnt; i++) {
         var temperature = (weatherData.list[i].main.temp - 273.15).toFixed(2);
+        var temperature_min = (weatherData.list[i].main.temp_min - 273.15).toFixed(2);
+        var temperature_max = (weatherData.list[i].main.temp_max - 273.15).toFixed(2);
         var pressure = (weatherData.list[i].main.pressure).toFixed(2);
         var clouds = weatherData.list[i].clouds.all;
         var wind = weatherData.list[i].wind.speed;
         var date = new Date(weatherData.list[i].dt_txt);
 
         page2.append(date.getTime(), temperature);
+        page2.append2(date.getTime(), temperature_min - Math.random());
+        page2.append3(date.getTime(), Number(temperature_max) + Math.random());
         page3.append(date.getTime(), pressure);
         page4.append(date.getTime(), clouds);
         page5.append(date.getTime(), wind);
