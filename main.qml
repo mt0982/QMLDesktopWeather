@@ -12,7 +12,7 @@ import "script/weather.js" as Weather
 ApplicationWindow {
     id: root
     visible: true
-    width: 640
+    width: 960
     height: 480
     title: qsTr("Desktop Weather")
 

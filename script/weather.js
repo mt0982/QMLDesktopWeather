@@ -8,6 +8,7 @@ function addZero(i) {
     return i;
 }
 
+/* 1 Day */
 function parseJSON() {
     var weatherAppKey = "f23961cb493d52dbd56fd0d656b3a396";
 
@@ -82,6 +83,7 @@ function parseWeatherData(weatherData) {
     page1.weatherUpdateTime = new Date(weatherData.dt * 1000);
 }
 
+/* 16 Days */
 function parseJSON16Days() {
     var weatherAppKey = "f23961cb493d52dbd56fd0d656b3a396";
 
@@ -104,12 +106,20 @@ function parseJSON16Days() {
 
 function parseWeatherData16Days(weatherData) {
 
+    /* Clear Data */
     page1.clearDayList()
 
+    /* Parameters */
+    var idx = page1.dayIndex;
+    var temp_max = weatherData.list[idx].temp.max - 273.15;
+    console.log(idx)
+
+    /* Reset Index */
+    page1.dayIndex = 0
+
+    /* Push To ListView */
     for(var i = 0; i < weatherData.cnt; i++) {
-        var temp_max = (weatherData.list[i].temp.max - 273.15).toFixed(2);
         var dt = new Date(weatherData.list[i].dt * 1000);
-        console.log((dt.getUTCMonth() + 1) + "." + dt.getDate())
         page1.addDay((dt.getUTCMonth() + 1) + "." + addZero(dt.getDate()))
     }
 }
