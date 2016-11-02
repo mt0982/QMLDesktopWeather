@@ -72,7 +72,7 @@ Item {
     /* Background */
     Image {
         id: bg
-        source: "https://s-media-cache-ak0.pinimg.com/originals/a4/0e/a8/a40ea8733910d1e6ff39355712a1ed94.jpg"
+        source: "qrc:/image/night.jpg"
         width: 200 //parent.width * 0.3
         height: parent.height
         fillMode: Image.PreserveAspectCrop
