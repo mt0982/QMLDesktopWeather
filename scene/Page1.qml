@@ -204,7 +204,7 @@ Item {
         delegate: Rectangle {
             width: 128
             height: 128
-            color: Qt.rgba(Math.random() * 0.7, Math.random() * 0.7, Math.random() * 0.7, 1.0)//"#1a1d21"
+            color: Qt.rgba(Math.random() * 0.7, Math.random() * 0.7, Math.random() * 0.7, 1.0) //"#1a1d21"
 
             Text {
                 id: textDesc
